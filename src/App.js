@@ -1,29 +1,21 @@
-import {useState} from 'react';
-
+import DisplayContent from "./components/Users/DisplayContent";
+import AddUser from "./components/Users/AddUser";
+import { useState } from "react";
 
 function App() {
-  const[username, setUsername]=useState('');
-  const[age, setAge]=useState('');
+  const [List, setList] = useState([]);
 
-  const usernameHandler=(e)=>{
-    setUsername(e.target.value);
-  }
-
-  const ageHandler=(e)=>{
-    setAge(e.target.value)
-  }
+  const userListHandler = (username, age) => {
+    setList((prev) => {
+      return [...prev, { username: username, age: age }];
+    });
+  };
 
   return (
-    <div style={{display:'flex', flexDirection:"column", alignItems:"center"}}>
-      <label>Username</label>
-      <input onChange={usernameHandler} style={{width:"20%"}}/>
-    
-      <label>Age</label>
-      <input onChange={ageHandler} style={{width:"20%"}}/>
-
-      
-      
-    </div>
+    <>
+      <AddUser userList={userListHandler} />
+      <DisplayContent users={List} />
+    </>
   );
 }
 
