@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./AddUser.module.css";
@@ -11,14 +11,19 @@ const AddUser = (props) => {
   const [users, setUsers] = useState([]);
   const [valid, setValid] = useState();
 
+  // const usernameRef=useRef();
+  // const ageRef=useRef();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    // console.log("REf",usernameRef);
+
     if (username.trim().length === 0 || age.trim().length === 0) {
       setValid({ title: "Error", content: "Enter the required details" });
       return;
     }
 
-    setUsers([...users, { username: username, age: age }]);
+    //setUsers([...users, { username: username, age: age }]);  //Not needed now
 
     props.userList(username, age);
 
@@ -51,9 +56,11 @@ const AddUser = (props) => {
         <form onSubmit={handleSubmit}>
           <label>Username</label>
           <input value={username} onChange={usernameHandler} />
+          {/* <input ref={usernameRef}/> */}
 
           <label>Age</label>
           <input value={age} onChange={ageHandler} />
+          {/* <input ref={ageRef}/> */}
           <Button type="submit">Add User</Button>
         </form>
       </Card>
